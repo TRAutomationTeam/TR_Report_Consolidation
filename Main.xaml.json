@@ -1,0 +1,33 @@
+{
+  "DisplayName": "Main",
+  "Tooltip": null,
+  "HelpLink": null,
+  "Color": null,
+  "OriginalIconFileName": null,
+  "Arguments": [
+    {
+      "Name": "in_ConsoTemplatePath",
+      "DisplayName": "in_ConsoTemplatePath",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "C:\\Automation Team\\REF_Integration\\RPA-Folder\\2024\\Output\\Consolidated Report\\ConsolidatedReport.xlsx",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "in_ConsoReportFolder",
+      "DisplayName": "in_ConsoReportFolder",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "C:\\Automation Team\\REF_Integration\\RPA-Folder\\2024\\Output\\Consolidated Report\\",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    }
+  ]
+}
