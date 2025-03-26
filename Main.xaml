@@ -128,7 +128,7 @@
       <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="1124,3306.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="705.6,3306.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int64" Name="MasterRecords" />
       <Variable x:TypeArguments="scg:IList(t:TRAutomationMaster)" Name="MasterCollectionIList" />
@@ -249,7 +249,7 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <If Condition="[NOT currentText.Equals(&quot;Not executed&quot;)]" DisplayName="Success/Failure status" sap:VirtualizedContainerService.HintSize="500.8,416" sap2010:WorkflowViewState.IdRef="If_1">
+                          <If Condition="[NOT currentText.Equals(&quot;Not executed&quot;) and NOT String.IsNullOrEmpty(currentText)]" DisplayName="Success/Failure status" sap:VirtualizedContainerService.HintSize="500.8,416" sap2010:WorkflowViewState.IdRef="If_1">
                             <If.Then>
                               <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="467.2,164.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
                                 <sap:WorkflowViewStateService.ViewState>
