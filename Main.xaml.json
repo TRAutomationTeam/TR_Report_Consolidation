@@ -6,8 +6,20 @@
   "OriginalIconFileName": null,
   "Arguments": [
     {
-      "Name": "in_ConsoTemplatePath",
-      "DisplayName": "in_ConsoTemplatePath",
+      "Name": "in_ConsoReportFolder",
+      "DisplayName": "in_ConsoReportFolder",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "C:\\Automation Team\\REF_Integration\\RPA-Folder\\2024\\Output\\Consolidated Report\\",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "in_ConsoTemplatePathWorkflow",
+      "DisplayName": "in_ConsoTemplatePathWorkflow",
       "Category": null,
       "Tooltip": null,
       "Placeholder": "C:\\Automation Team\\REF_Integration\\RPA-Folder\\2024\\Output\\Consolidated Report\\ConsolidatedReport.xlsx",
@@ -18,11 +30,11 @@
       "DataSourceItems": null
     },
     {
-      "Name": "in_ConsoReportFolder",
-      "DisplayName": "in_ConsoReportFolder",
+      "Name": "in_ConsoTemplatePathSanity",
+      "DisplayName": "in_ConsoTemplatePathSanity",
       "Category": null,
       "Tooltip": null,
-      "Placeholder": "C:\\Automation Team\\REF_Integration\\RPA-Folder\\2024\\Output\\Consolidated Report\\",
+      "Placeholder": "C:\\Automation Team\\REF_Integration\\RPA-Folder\\2024\\Output\\Consolidated Report\\ConsolidatedReportSanity.xlsx",
       "Widget": null,
       "IsRequired": false,
       "IsPrincipal": true,
