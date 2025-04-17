@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_ConsoReportFolder="C:\Automation Team\REF_Integration\RPA-Folder\2024\Output\Consolidated Report\" this:Main.in_ConsoTemplatePathWorkflow="C:\Automation Team\REF_Integration\RPA-Folder\2024\Output\Consolidated Report\ConsolidatedReportWorkflow.xlsx" this:Main.in_ConsoTemplatePathSanity="C:\Automation Team\REF_Integration\RPA-Folder\2024\Output\Consolidated Report\ConsolidatedReportSanity.xlsx" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:t="clr-namespace:TR_Report_Consolidation;assembly=DataService.TR_Report_Consolidation" xmlns:this="clr-namespace:" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" this:Main.in_ConsoReportFolder="C:\Automation Team\REF_Integration\RPA-Folder\2024\Output\Consolidated Report\" this:Main.in_ConsoTemplatePathWorkflow="C:\Automation Team\REF_Integration\RPA-Folder\2024\Output\Consolidated Report\ConsolidatedReportRegression.xlsx" this:Main.in_ConsoTemplatePathSanity="C:\Automation Team\REF_Integration\RPA-Folder\2024\Output\Consolidated Report\ConsolidatedReportSanity.xlsx" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:t="clr-namespace:TR_Report_Consolidation;assembly=DataService.TR_Report_Consolidation" xmlns:this="clr-namespace:" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_ConsoReportFolder" Type="InArgument(x:String)" />
     <x:Property Name="in_ConsoTemplatePathWorkflow" Type="InArgument(x:String)" />
@@ -150,7 +150,7 @@
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Consolidation Report - Workflow" sap:VirtualizedContainerService.HintSize="483.2,56.8" sap2010:WorkflowViewState.IdRef="Sequence_4">
+          <Sequence DisplayName="Consolidation Report - Regression" sap:VirtualizedContainerService.HintSize="483.2,56.8" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -311,8 +311,8 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ForEach>
-            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_ConsoReportFolder+&quot;Consolidated_Report_Workflow_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy Consolidated template to datetime report" sap:VirtualizedContainerService.HintSize="416,187.2" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[in_ConsoTemplatePathWorkflow]" />
-            <ui:WriteRange WorkbookPathResource="{x:Null}" AddHeaders="False" DataTable="[dt_Consolidated_Workflow]" DisplayName="Write Conso-data to excel" sap:VirtualizedContainerService.HintSize="416,148" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A2" WorkbookPath="[in_ConsoReportFolder+&quot;Consolidated_Report_Workflow_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
+            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_ConsoReportFolder+&quot;Consolidated_Report_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy Consolidated template to datetime report" sap:VirtualizedContainerService.HintSize="416,187.2" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[in_ConsoTemplatePathWorkflow]" />
+            <ui:WriteRange WorkbookPathResource="{x:Null}" AddHeaders="False" DataTable="[dt_Consolidated_Workflow]" DisplayName="Write Conso-data to excel" sap:VirtualizedContainerService.HintSize="416,148" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A2" WorkbookPath="[in_ConsoReportFolder+&quot;Consolidated_Report_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
             <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Report generated successfully - &quot;+in_ConsoReportFolder+&quot;Consolidated_Report_Workflow_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
           </Sequence>
           <Sequence DisplayName="Consolidation Report - Sanity" sap:VirtualizedContainerService.HintSize="483.2,2314.4" sap2010:WorkflowViewState.IdRef="Sequence_10">
@@ -331,7 +331,23 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
             <ui:RetryScope DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="449.6,348.8" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="3">
               <ui:RetryScope.ActivityBody>
                 <ActivityAction>
-                  <uda:QueryEntityRecords x:TypeArguments="t:TRSanityMaster" FilterArguments="{x:Null}" ContinueOnError="False" DisplayName="Query Sanity Master Entity Records" EntityId="170805a8-b016-f011-aaa7-002248a1377f" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334.4,140.8" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_2" OutputRecords="[MasterCollectionIListSanity]" QueriedEntityId="170805a8-b016-f011-aaa7-002248a1377f" Skip="0" SortAscending="False" SortByField="CreateTime" TimeoutInMs="30000" Top="1000" TotalRecords="[MasterRecords]">
+                  <uda:QueryEntityRecords x:TypeArguments="t:TRSanityMaster" ContinueOnError="False" DisplayName="Query Sanity Master Entity Records" EntityId="170805a8-b016-f011-aaa7-002248a1377f" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334.4,140.8" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_2" OutputRecords="[MasterCollectionIListSanity]" QueriedEntityId="170805a8-b016-f011-aaa7-002248a1377f" Skip="0" SortAscending="False" SortByField="CreateTime" TimeoutInMs="30000" Top="1000" TotalRecords="[MasterRecords]">
+                    <uda:QueryEntityRecords.FilterArguments>
+                      <uda:FilterArgument FilterActivityType="{x:Null}">
+                        <uda:FilterArgument.Filter>
+                          <uda:GroupFilter Index="0" Operator="AND">
+                            <uda:GroupFilter.Filters>
+                              <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
+                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="ScriptedOn" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="0" />
+                              </scg:List>
+                            </uda:GroupFilter.Filters>
+                            <uda:GroupFilter.Groups>
+                              <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
+                            </uda:GroupFilter.Groups>
+                          </uda:GroupFilter>
+                        </uda:FilterArgument.Filter>
+                      </uda:FilterArgument>
+                    </uda:QueryEntityRecords.FilterArguments>
                     <uda:QueryEntityRecords.FilterValues>
                       <scg:List x:TypeArguments="InArgument" Capacity="4">
                         <InArgument x:TypeArguments="x:String">[Now.ToString("dd/MM/yyyy")]</InArgument>
