@@ -18,11 +18,11 @@
       "DataSourceItems": null
     },
     {
-      "Name": "in_ConsoTemplatePathWorkflow",
-      "DisplayName": "in_ConsoTemplatePathWorkflow",
+      "Name": "in_ConsoTemplatePathSanity",
+      "DisplayName": "in_ConsoTemplatePathSanity",
       "Category": null,
       "Tooltip": null,
-      "Placeholder": "C:\\Automation Team\\REF_Integration\\RPA-Folder\\2024\\Output\\Consolidated Report\\ConsolidatedReport.xlsx",
+      "Placeholder": "C:\\Automation Team\\REF_Integration\\RPA-Folder\\2024\\Output\\Consolidated Report\\ConsolidatedReportSanity.xlsx",
       "Widget": null,
       "IsRequired": false,
       "IsPrincipal": true,
@@ -30,11 +30,35 @@
       "DataSourceItems": null
     },
     {
-      "Name": "in_ConsoTemplatePathSanity",
-      "DisplayName": "in_ConsoTemplatePathSanity",
+      "Name": "in_ConsoTemplatePathRegression",
+      "DisplayName": "in_ConsoTemplatePathRegression",
       "Category": null,
       "Tooltip": null,
-      "Placeholder": "C:\\Automation Team\\REF_Integration\\RPA-Folder\\2024\\Output\\Consolidated Report\\ConsolidatedReportSanity.xlsx",
+      "Placeholder": "C:\\Automation Team\\REF_Integration\\RPA-Folder\\2024\\Output\\Consolidated Report\\ConsolidatedReportRegression.xlsx",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "in_HistoricReportFlag",
+      "DisplayName": "in_HistoricReportFlag",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "True",
+      "Widget": null,
+      "IsRequired": false,
+      "IsPrincipal": true,
+      "ArgumentType": 0,
+      "DataSourceItems": null
+    },
+    {
+      "Name": "in_DaysToRetrieve",
+      "DisplayName": "in_DaysToRetrieve",
+      "Category": null,
+      "Tooltip": null,
+      "Placeholder": "3",
       "Widget": null,
       "IsRequired": false,
       "IsPrincipal": true,
