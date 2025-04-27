@@ -129,362 +129,85 @@
       <AssemblyReference>UiPath.Mail</AssemblyReference>
       <AssemblyReference>UiPath.Mail.Activities.Design</AssemblyReference>
       <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
+      <AssemblyReference>System.Linq.Async.Queryable</AssemblyReference>
+      <AssemblyReference>System.Linq.Parallel</AssemblyReference>
+      <AssemblyReference>System.Collections.Immutable</AssemblyReference>
+      <AssemblyReference>System.Linq.Queryable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
   <sap:WorkflowViewStateService.ViewState>
     <scg:Dictionary x:TypeArguments="x:String, x:Object">
       <x:Boolean x:Key="ShouldExpandAll">True</x:Boolean>
+      <x:Boolean x:Key="ShouldCollapseAll">False</x:Boolean>
     </scg:Dictionary>
   </sap:WorkflowViewStateService.ViewState>
-  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="1115.2,9202.4" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Main Sequence" sap:VirtualizedContainerService.HintSize="806.4,13755.2" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Int64" Name="MasterRecords" />
-      <Variable x:TypeArguments="scg:IList(t:TRAutomationMaster)" Name="MasterCollectionIList" />
+      <Variable x:TypeArguments="scg:IList(t:TRAutomationMaster)" Name="MasterCollectionIListRegression" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Consolidated_Workflow" />
       <Variable x:TypeArguments="x:String" Name="str_ComponentStatus" />
+      <Variable x:TypeArguments="x:Int32" Name="CounterAutomationMasterDaily" />
+      <Variable x:TypeArguments="x:Int32" Name="CounterSanityMasterDaily" />
+      <Variable x:TypeArguments="x:Int32" Name="CounterAutomationMasterHistoric" />
+      <Variable x:TypeArguments="x:Int32" Name="CounterSanityMasterHistoric" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <TryCatch DisplayName="Daily Consolidation (Regression/Sanity)" sap:VirtualizedContainerService.HintSize="620.8,4545.6" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="Daily Consolidation (Regression/Sanity)" sap:VirtualizedContainerService.HintSize="806.4,7525.6" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <Sequence DisplayName="Daily Consolidation - Regression/Sanity" sap:VirtualizedContainerService.HintSize="516.8,3988" sap2010:WorkflowViewState.IdRef="Sequence_8">
+        <Sequence DisplayName="Daily Consolidation - Regression/Sanity" sap:VirtualizedContainerService.HintSize="769.6,6968" sap2010:WorkflowViewState.IdRef="Sequence_8">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
-          <Sequence DisplayName="Daily Consolidation Report - Regression" sap:VirtualizedContainerService.HintSize="483.2,1613.6" sap2010:WorkflowViewState.IdRef="Sequence_4">
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;---Daily---Consolidation---Report---generation---of---Regression---started&quot;]" />
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Info" Message="[&quot;****************************************************************************&quot;]" />
-            <ui:RetryScope DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="416,348.8" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="3">
-              <ui:RetryScope.ActivityBody>
-                <ActivityAction>
-                  <uda:QueryEntityRecords x:TypeArguments="t:TRAutomationMaster" ContinueOnError="False" DisplayName="Query Master Entity Records" EntityId="6e0003df-b003-f011-90cb-0022489c7866" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334.4,140.8" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_1" OutputRecords="[MasterCollectionIList]" QueriedEntityId="6e0003df-b003-f011-90cb-0022489c7866" Skip="0" SortAscending="False" SortByField="CreateTime" TimeoutInMs="30000" Top="1000" TotalRecords="[MasterRecords]">
-                    <uda:QueryEntityRecords.FilterArguments>
-                      <uda:FilterArgument FilterActivityType="{x:Null}">
-                        <uda:FilterArgument.Filter>
-                          <uda:GroupFilter Index="0" Operator="AND">
-                            <uda:GroupFilter.Filters>
-                              <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
-                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="ScriptedOn" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="0" />
-                              </scg:List>
-                            </uda:GroupFilter.Filters>
-                            <uda:GroupFilter.Groups>
-                              <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
-                            </uda:GroupFilter.Groups>
-                          </uda:GroupFilter>
-                        </uda:FilterArgument.Filter>
-                      </uda:FilterArgument>
-                    </uda:QueryEntityRecords.FilterArguments>
-                    <uda:QueryEntityRecords.FilterValues>
-                      <scg:List x:TypeArguments="InArgument" Capacity="4">
-                        <InArgument x:TypeArguments="x:String">[Now.ToString("dd/MM/yyyy")]</InArgument>
-                      </scg:List>
-                    </uda:QueryEntityRecords.FilterValues>
-                  </uda:QueryEntityRecords>
-                </ActivityAction>
-              </ui:RetryScope.ActivityBody>
-              <ui:RetryScope.Condition>
-                <ActivityFunc x:TypeArguments="x:Boolean" />
-              </ui:RetryScope.Condition>
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:RetryScope>
-            <ui:LogMessage DisplayName="Master Entries Log" sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Master Entries in DB- &quot;+MasterRecords.ToString]" />
-            <ui:BuildDataTable DataTable="[dt_Consolidated_Workflow]" DisplayName="Build Consolidated dt" sap:VirtualizedContainerService.HintSize="416,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Binder_x0020_ID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Execution_x0020_Status&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Engagement_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Service_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Submission_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;No_x0020_of_x0020_Components_x0020_Executed&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Executed&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Pass&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Fail&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_By&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_On&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:BuildDataTable>
-            <ui:ForEach x:TypeArguments="t:TRAutomationMaster" CurrentIndex="{x:Null}" DisplayName="For Each currentTRAutomationMaster" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[MasterCollectionIList]">
-              <ui:ForEach.Body>
-                <ActivityAction x:TypeArguments="t:TRAutomationMaster">
-                  <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="t:TRAutomationMaster" Name="currentTRAutomationMaster" />
-                  </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="467.2,966.4" sap2010:WorkflowViewState.IdRef="Sequence_2">
-                    <Sequence.Variables>
-                      <Variable x:TypeArguments="x:Int32" Name="int_ComponentsExecuted" />
-                    </Sequence.Variables>
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <Assign DisplayName="Component status" sap:VirtualizedContainerService.HintSize="433.6,115.2" sap2010:WorkflowViewState.IdRef="Assign_1">
-                      <Assign.To>
-                        <OutArgument x:TypeArguments="x:String">[str_ComponentStatus]</OutArgument>
-                      </Assign.To>
-                      <Assign.Value>
-                        <InArgument x:TypeArguments="x:String" xml:space="preserve">[currentTRAutomationMaster.StatusAddDocumentFileroom+"_"+
-currentTRAutomationMaster.StatusAddDocumentSPBinder+"_"+
-currentTRAutomationMaster.StatusAddDocumentTaxcaddy+"_"+
-currentTRAutomationMaster.StatusAnnotation+"_"+
-currentTRAutomationMaster.StatusBinderMenu+"_"+
-currentTRAutomationMaster.StatusClientCreation+"_"+
-currentTRAutomationMaster.StatusDragDrop+"_"+
-currentTRAutomationMaster.StatusExportMatchUpdate1stRun+"_"+
-currentTRAutomationMaster.StatusExportMatchUpdate2ndRun+"_"+
-currentTRAutomationMaster.StatusImportTR+"_"+
-currentTRAutomationMaster.StatusIndexTree+"_"+
-currentTRAutomationMaster.StatusNotes+"_"+
-currentTRAutomationMaster.StatusPrint1stRun+"_"+
-currentTRAutomationMaster.StatusPrint2ndRun+"_"+
-currentTRAutomationMaster.StatusPrint3rdRun+"_"+
-currentTRAutomationMaster.StatusReviewTree+"_"+
-currentTRAutomationMaster.StatusSCD+"_"+
-currentTRAutomationMaster.StatusSubmissionWizard+"_"+
-currentTRAutomationMaster.StatusWizard]</InArgument>
-                      </Assign.Value>
-                    </Assign>
-                    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="No of components executed based on status" sap:VirtualizedContainerService.HintSize="433.6,56.8" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[str_ComponentStatus.Split(&quot;_&quot;c)]">
-                      <ui:ForEach.Body>
-                        <ActivityAction x:TypeArguments="x:String">
-                          <ActivityAction.Argument>
-                            <DelegateInArgument x:TypeArguments="x:String" Name="currentText" />
-                          </ActivityAction.Argument>
-                          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="534.4,476" sap2010:WorkflowViewState.IdRef="Sequence_5">
-                            <sap:WorkflowViewStateService.ViewState>
-                              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                              </scg:Dictionary>
-                            </sap:WorkflowViewStateService.ViewState>
-                            <If Condition="[NOT currentText.Equals(&quot;Not executed&quot;) and NOT String.IsNullOrEmpty(currentText)]" DisplayName="Success/Failure status" sap:VirtualizedContainerService.HintSize="500.8,416" sap2010:WorkflowViewState.IdRef="If_1">
-                              <If.Then>
-                                <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="467.2,164.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                  <Assign DisplayName="increment no of comp executed" sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_3">
-                                    <Assign.To>
-                                      <OutArgument x:TypeArguments="x:Int32">[int_ComponentsExecuted]</OutArgument>
-                                    </Assign.To>
-                                    <Assign.Value>
-                                      <InArgument x:TypeArguments="x:Int32">[int_ComponentsExecuted+1]</InArgument>
-                                    </Assign.Value>
-                                  </Assign>
-                                </Sequence>
-                              </If.Then>
-                              <If.Else>
-                                <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_7">
-                                  <sap:WorkflowViewStateService.ViewState>
-                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                                    </scg:Dictionary>
-                                  </sap:WorkflowViewStateService.ViewState>
-                                </Sequence>
-                              </If.Else>
-                            </If>
-                          </Sequence>
-                        </ActivityAction>
-                      </ui:ForEach.Body>
-                      <sap:WorkflowViewStateService.ViewState>
-                        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                        </scg:Dictionary>
-                      </sap:WorkflowViewStateService.ViewState>
-                    </ui:ForEach>
-                    <ui:LogMessage DisplayName="No of components executed" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;No of components executed for Binder - &quot;+currentTRAutomationMaster.BinderID+&quot; - &quot;+int_ComponentsExecuted.ToString]" />
-                    <ui:LogMessage DisplayName="Creation time" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Created entry on - &quot;+currentTRAutomationMaster.CreateTime.ToString]" />
-                    <ui:LogMessage DisplayName="" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;*********************************************************&quot;]" />
-                    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[New Object() {currentTRAutomationMaster.BinderID,currentTRAutomationMaster.ExecutionStatus,currentTRAutomationMaster.EngagementType, currentTRAutomationMaster.ServiceType, currentTRAutomationMaster.SubmissionType,int_ComponentsExecuted,currentTRAutomationMaster.TotalTCsExecuted, currentTRAutomationMaster.TotalTCsPass, currentTRAutomationMaster.TotalTCsFail,currentTRAutomationMaster.UserEmail, currentTRAutomationMaster.ScriptedOn}]" DataTable="[dt_Consolidated_Workflow]" DisplayName="Add Conso record entry " sap:VirtualizedContainerService.HintSize="433.6,211.2" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
-                  </Sequence>
-                </ActivityAction>
-              </ui:ForEach.Body>
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:ForEach>
-            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_ConsoReportFolder+&quot;Consolidated_Report_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy Consolidated template to datetime report" sap:VirtualizedContainerService.HintSize="416,187.2" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[in_ConsoTemplatePathRegression]" />
-            <ui:WriteRange WorkbookPathResource="{x:Null}" AddHeaders="False" DataTable="[dt_Consolidated_Workflow]" DisplayName="Write Conso-data to excel" sap:VirtualizedContainerService.HintSize="416,148" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A2" WorkbookPath="[in_ConsoReportFolder+&quot;Consolidated_Report_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Report generated successfully - &quot;+in_ConsoReportFolder+&quot;Consolidated_Report_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
-          </Sequence>
-          <Sequence DisplayName="Daily Consolidation Report - Sanity" sap:VirtualizedContainerService.HintSize="483.2,2314.4" sap2010:WorkflowViewState.IdRef="Sequence_10">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="scg:IList(t:TRSanityMaster)" Name="MasterCollectionIListSanity" />
-              <Variable x:TypeArguments="sd:DataTable" Name="dt_Consolidated_Sanity" />
-            </Sequence.Variables>
-            <sap:WorkflowViewStateService.ViewState>
-              <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-              </scg:Dictionary>
-            </sap:WorkflowViewStateService.ViewState>
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;---Daily---Consolidation---Report---generation---of---Sanity---flows---started&quot;]" />
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[&quot;****************************************************************************&quot;]" />
-            <ui:RetryScope DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="449.6,348.8" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="3">
-              <ui:RetryScope.ActivityBody>
-                <ActivityAction>
-                  <uda:QueryEntityRecords x:TypeArguments="t:TRSanityMaster" ContinueOnError="False" DisplayName="Query Sanity Master Entity Records" EntityId="170805a8-b016-f011-aaa7-002248a1377f" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334.4,140.8" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_2" OutputRecords="[MasterCollectionIListSanity]" QueriedEntityId="170805a8-b016-f011-aaa7-002248a1377f" Skip="0" SortAscending="False" SortByField="CreateTime" TimeoutInMs="30000" Top="1000" TotalRecords="[MasterRecords]">
-                    <uda:QueryEntityRecords.FilterArguments>
-                      <uda:FilterArgument FilterActivityType="{x:Null}">
-                        <uda:FilterArgument.Filter>
-                          <uda:GroupFilter Index="0" Operator="AND">
-                            <uda:GroupFilter.Filters>
-                              <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
-                                <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="ScriptedOn" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="0" />
-                              </scg:List>
-                            </uda:GroupFilter.Filters>
-                            <uda:GroupFilter.Groups>
-                              <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
-                            </uda:GroupFilter.Groups>
-                          </uda:GroupFilter>
-                        </uda:FilterArgument.Filter>
-                      </uda:FilterArgument>
-                    </uda:QueryEntityRecords.FilterArguments>
-                    <uda:QueryEntityRecords.FilterValues>
-                      <scg:List x:TypeArguments="InArgument" Capacity="4">
-                        <InArgument x:TypeArguments="x:String">[Now.ToString("dd/MM/yyyy")]</InArgument>
-                      </scg:List>
-                    </uda:QueryEntityRecords.FilterValues>
-                  </uda:QueryEntityRecords>
-                </ActivityAction>
-              </ui:RetryScope.ActivityBody>
-              <ui:RetryScope.Condition>
-                <ActivityFunc x:TypeArguments="x:Boolean" />
-              </ui:RetryScope.Condition>
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:RetryScope>
-            <ui:LogMessage DisplayName="Master Entries Log" sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Master Entries in DB- &quot;+MasterRecords.ToString]" />
-            <ui:BuildDataTable DataTable="[dt_Consolidated_Sanity]" DisplayName="Build Consolidated dt" sap:VirtualizedContainerService.HintSize="449.6,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Binder_x0020_ID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Execution_x0020_Status&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Engagement_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Service_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Submission_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Tax_x0020_Software&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Executed&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Pass&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Fail&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_Execution_x0020_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_Application_x0020_Wait_x0020_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_By&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_On&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:BuildDataTable>
-            <ui:ForEach x:TypeArguments="t:TRSanityMaster" CurrentIndex="{x:Null}" DisplayName="For Each currentSanityMaster" sap:VirtualizedContainerService.HintSize="449.6,766.4" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[MasterCollectionIListSanity]">
-              <ui:ForEach.Body>
-                <ActivityAction x:TypeArguments="t:TRSanityMaster">
-                  <ActivityAction.Argument>
-                    <DelegateInArgument x:TypeArguments="t:TRSanityMaster" Name="currentSanityMaster" />
-                  </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,620" sap2010:WorkflowViewState.IdRef="Sequence_11">
-                    <sap:WorkflowViewStateService.ViewState>
-                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      </scg:Dictionary>
-                    </sap:WorkflowViewStateService.ViewState>
-                    <ui:LogMessage DisplayName="Creation time" sap:VirtualizedContainerService.HintSize="382.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="Info" Message="[&quot;Created entry on - &quot;+currentSanityMaster.CreateTime.ToString]" />
-                    <ui:LogMessage DisplayName="" sap:VirtualizedContainerService.HintSize="382.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Info" Message="[&quot;*********************************************************&quot;]" />
-                    <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[New Object() {currentSanityMaster.BinderID,currentSanityMaster.ExecutionStatus,currentSanityMaster.EngagementType, currentSanityMaster.ServiceType, currentSanityMaster.SubmissionType,currentSanityMaster.TaxSoftware,currentSanityMaster.TotalTCsExecuted,currentSanityMaster.TotalTCsPass, currentSanityMaster.TotalTCsFail,currentSanityMaster.TotalExecutionTime,currentSanityMaster.TotalApplicationWaitTime,currentSanityMaster.UserEmail,currentSanityMaster.ScriptedOn}]" DataTable="[dt_Consolidated_Sanity]" DisplayName="Add Conso record entry " sap:VirtualizedContainerService.HintSize="382.4,211.2" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
-                  </Sequence>
-                </ActivityAction>
-              </ui:ForEach.Body>
-              <sap:WorkflowViewStateService.ViewState>
-                <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                </scg:Dictionary>
-              </sap:WorkflowViewStateService.ViewState>
-            </ui:ForEach>
-            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_ConsoReportFolder+&quot;Consolidated_Report_Sanity_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy Consolidated template to datetime report" sap:VirtualizedContainerService.HintSize="449.6,187.2" sap2010:WorkflowViewState.IdRef="CopyFile_2" Overwrite="True" Path="[in_ConsoTemplatePathSanity]" />
-            <ui:WriteRange WorkbookPathResource="{x:Null}" AddHeaders="False" DataTable="[dt_Consolidated_Sanity]" DisplayName="Write Conso-data to excel" sap:VirtualizedContainerService.HintSize="449.6,148" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Sheet1" StartingCell="A2" WorkbookPath="[in_ConsoReportFolder+&quot;Consolidated_Report_Sanity_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
-            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="449.6,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[&quot;Report generated successfully - &quot;+in_ConsoReportFolder+&quot;Consolidated_Report_Sanity_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
-          </Sequence>
-        </Sequence>
-      </TryCatch.Try>
-      <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="520,213.6" sap2010:WorkflowViewState.IdRef="Catch`1_1">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-              <x:Boolean x:Key="IsPinned">False</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <ActivityAction x:TypeArguments="s:Exception">
-            <ActivityAction.Argument>
-              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
-            </ActivityAction.Argument>
-            <ui:LogMessage DisplayName="Log failure " sap:VirtualizedContainerService.HintSize="334.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[&quot;Failed to generate consolidated report - &quot;+exception.Message]" />
-          </ActivityAction>
-        </Catch>
-      </TryCatch.Catches>
-    </TryCatch>
-    <If Condition="[in_HistoricReportFlag]" DisplayName="Periodic Consolidation (Regression/Sanity)" sap:VirtualizedContainerService.HintSize="620.8,4633.6" sap2010:WorkflowViewState.IdRef="If_3">
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
-      <If.Then>
-        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="587.2,4382.4" sap2010:WorkflowViewState.IdRef="Sequence_20">
-          <sap:WorkflowViewStateService.ViewState>
-            <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-            </scg:Dictionary>
-          </sap:WorkflowViewStateService.ViewState>
-          <TryCatch DisplayName="Periodic Consolidation (Regression/Sanity)" sap:VirtualizedContainerService.HintSize="553.6,4322.4" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+          <Sequence DisplayName="Daily Consolidation Report - Regression" sap:VirtualizedContainerService.HintSize="736,3914.4" sap2010:WorkflowViewState.IdRef="Sequence_4">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 <x:Boolean x:Key="IsPinned">False</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <TryCatch.Try>
-              <Sequence DisplayName="Periodic Consolidation - Regression/Sanity" sap:VirtualizedContainerService.HintSize="516.8,4068" sap2010:WorkflowViewState.IdRef="Sequence_19">
-                <sap:WorkflowViewStateService.ViewState>
-                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                  </scg:Dictionary>
-                </sap:WorkflowViewStateService.ViewState>
-                <Sequence DisplayName="Historic Consolidation Report - Regression" sap:VirtualizedContainerService.HintSize="483.2,1693.6" sap2010:WorkflowViewState.IdRef="Sequence_12">
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="702.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info" Message="[&quot;---Daily---Consolidation---Report---generation---of---Regression---started&quot;]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="702.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_15" Level="Info" Message="[&quot;****************************************************************************&quot;]" />
+            <ui:BuildDataTable DataTable="[dt_Consolidated_Workflow]" DisplayName="Build Consolidated dt" sap:VirtualizedContainerService.HintSize="702.4,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_1" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Binder_x0020_ID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Execution_x0020_Status&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Engagement_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Service_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Submission_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;No_x0020_of_x0020_Components_x0020_Executed&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Executed&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Pass&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Fail&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_By&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_On&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:BuildDataTable>
+            <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" Condition="[CounterAutomationMasterDaily&lt;=MasterRecords]" DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="702.4,2880.8" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_1">
+              <ui:InterruptibleDoWhile.Body>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="668.8,2734.4" sap2010:WorkflowViewState.IdRef="Sequence_22">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="Info" Message="[&quot;Historic---Consolidation---Report---generation---of---Workflow---started&quot;]" />
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Info" Message="[&quot;****************************************************************************&quot;]" />
-                  <ui:RetryScope DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="416,428.8" sap2010:WorkflowViewState.IdRef="RetryScope_3" NumberOfRetries="3">
+                  <ui:RetryScope DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="635.2,348.8" sap2010:WorkflowViewState.IdRef="RetryScope_1" NumberOfRetries="3">
                     <ui:RetryScope.ActivityBody>
                       <ActivityAction>
-                        <uda:QueryEntityRecords x:TypeArguments="t:TRAutomationMaster" ContinueOnError="False" DisplayName="Query Master Entity Records" EntityId="6e0003df-b003-f011-90cb-0022489c7866" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334.4,140.8" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_4" OutputRecords="[MasterCollectionIList]" QueriedEntityId="6e0003df-b003-f011-90cb-0022489c7866" Skip="0" SortAscending="False" SortByField="CreateTime" TimeoutInMs="30000" Top="1000" TotalRecords="[MasterRecords]">
+                        <uda:QueryEntityRecords x:TypeArguments="t:TRAutomationMaster" ContinueOnError="False" DisplayName="Query Master Entity Records" EntityId="6e0003df-b003-f011-90cb-0022489c7866" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334.4,140.8" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_1" OutputRecords="[MasterCollectionIListRegression]" QueriedEntityId="6e0003df-b003-f011-90cb-0022489c7866" Skip="[CounterAutomationMasterDaily]" SortAscending="False" SortByField="CreateTime" TimeoutInMs="30000" Top="1000" TotalRecords="[MasterRecords]">
                           <uda:QueryEntityRecords.FilterArguments>
                             <uda:FilterArgument FilterActivityType="{x:Null}">
                               <uda:FilterArgument.Filter>
                                 <uda:GroupFilter Index="0" Operator="AND">
                                   <uda:GroupFilter.Filters>
                                     <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
-                                      <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="CreateTime" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="&gt;" ValueIndex="0" />
+                                      <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="ScriptedOn" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="0" />
                                     </scg:List>
                                   </uda:GroupFilter.Filters>
                                   <uda:GroupFilter.Groups>
@@ -496,7 +219,7 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
                           </uda:QueryEntityRecords.FilterArguments>
                           <uda:QueryEntityRecords.FilterValues>
                             <scg:List x:TypeArguments="InArgument" Capacity="4">
-                              <InArgument x:TypeArguments="s:DateTimeOffset">[now.AddDays(-in_DaysToRetrieve)]</InArgument>
+                              <InArgument x:TypeArguments="x:String">[Now.ToString("dd/MM/yyyy")]</InArgument>
                             </scg:List>
                           </uda:QueryEntityRecords.FilterValues>
                         </uda:QueryEntityRecords>
@@ -512,22 +235,49 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:RetryScope>
-                  <ui:LogMessage DisplayName="Master Entries Log" sap:VirtualizedContainerService.HintSize="416,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Master Entries in DB- &quot;+MasterRecords.ToString]" />
-                  <ui:BuildDataTable DataTable="[dt_Consolidated_Workflow]" DisplayName="Build Consolidated dt" sap:VirtualizedContainerService.HintSize="416,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_3" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Binder_x0020_ID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Execution_x0020_Status&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Engagement_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Service_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Submission_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;No_x0020_of_x0020_Components_x0020_Executed&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Executed&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Pass&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Fail&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_By&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_On&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
+                  <If Condition="[MasterRecords.Equals(0)]" DisplayName="Break loop if no records in master" sap:VirtualizedContainerService.HintSize="635.2,368" sap2010:WorkflowViewState.IdRef="If_5">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
-                        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                  </ui:BuildDataTable>
-                  <ui:ForEach x:TypeArguments="t:TRAutomationMaster" CurrentIndex="{x:Null}" DisplayName="For Each currentTRAutomationMaster" sap:VirtualizedContainerService.HintSize="416,56.8" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[MasterCollectionIList]">
+                    <If.Then>
+                      <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,108" sap2010:WorkflowViewState.IdRef="Sequence_28">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:Break sap:VirtualizedContainerService.HintSize="382.4,48" sap2010:WorkflowViewState.IdRef="Break_1" />
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_29">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <Assign DisplayName="Batch Counter (Pagination)" sap:VirtualizedContainerService.HintSize="635.2,113.6" sap2010:WorkflowViewState.IdRef="Assign_6">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[CounterAutomationMasterDaily]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">[CounterAutomationMasterDaily+MasterCollectionIListRegression.Count]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:LogMessage DisplayName="Master Entries Log" sap:VirtualizedContainerService.HintSize="635.2,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Master Entries in DB- &quot;+MasterRecords.ToString]" />
+                  <ui:ForEach x:TypeArguments="t:TRAutomationMaster" CurrentIndex="{x:Null}" DisplayName="For Each currentTRAutomationMaster" sap:VirtualizedContainerService.HintSize="635.2,1669.6" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[MasterCollectionIListRegression]">
                     <ui:ForEach.Body>
                       <ActivityAction x:TypeArguments="t:TRAutomationMaster">
                         <ActivityAction.Argument>
                           <DelegateInArgument x:TypeArguments="t:TRAutomationMaster" Name="currentTRAutomationMaster" />
                         </ActivityAction.Argument>
-                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="467.2,966.4" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="601.6,1532" sap2010:WorkflowViewState.IdRef="Sequence_2">
                           <Sequence.Variables>
                             <Variable x:TypeArguments="x:Int32" Name="int_ComponentsExecuted" />
                           </Sequence.Variables>
@@ -536,7 +286,7 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <Assign DisplayName="Component status" sap:VirtualizedContainerService.HintSize="433.6,115.2" sap2010:WorkflowViewState.IdRef="Assign_4">
+                          <Assign DisplayName="Component status" sap:VirtualizedContainerService.HintSize="568,115.2" sap2010:WorkflowViewState.IdRef="Assign_1">
                             <Assign.To>
                               <OutArgument x:TypeArguments="x:String">[str_ComponentStatus]</OutArgument>
                             </Assign.To>
@@ -562,27 +312,27 @@ currentTRAutomationMaster.StatusSubmissionWizard+"_"+
 currentTRAutomationMaster.StatusWizard]</InArgument>
                             </Assign.Value>
                           </Assign>
-                          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="No of components executed based on status" sap:VirtualizedContainerService.HintSize="433.6,56.8" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[str_ComponentStatus.Split(&quot;_&quot;c)]">
+                          <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="No of components executed based on status" sap:VirtualizedContainerService.HintSize="568,622.4" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[str_ComponentStatus.Split(&quot;_&quot;c)]">
                             <ui:ForEach.Body>
                               <ActivityAction x:TypeArguments="x:String">
                                 <ActivityAction.Argument>
                                   <DelegateInArgument x:TypeArguments="x:String" Name="currentText" />
                                 </ActivityAction.Argument>
-                                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="534.4,476" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="534.4,476" sap2010:WorkflowViewState.IdRef="Sequence_5">
                                   <sap:WorkflowViewStateService.ViewState>
                                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                     </scg:Dictionary>
                                   </sap:WorkflowViewStateService.ViewState>
-                                  <If Condition="[NOT currentText.Equals(&quot;Not executed&quot;) and NOT String.IsNullOrEmpty(currentText)]" DisplayName="Success/Failure status" sap:VirtualizedContainerService.HintSize="500.8,416" sap2010:WorkflowViewState.IdRef="If_2">
+                                  <If Condition="[NOT currentText.Equals(&quot;Not executed&quot;) and NOT String.IsNullOrEmpty(currentText)]" DisplayName="Success/Failure status" sap:VirtualizedContainerService.HintSize="500.8,416" sap2010:WorkflowViewState.IdRef="If_1">
                                     <If.Then>
-                                      <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="467.2,164.8" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                                      <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="467.2,164.8" sap2010:WorkflowViewState.IdRef="Sequence_6">
                                         <sap:WorkflowViewStateService.ViewState>
                                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                           </scg:Dictionary>
                                         </sap:WorkflowViewStateService.ViewState>
-                                        <Assign DisplayName="increment no of comp executed" sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_5">
+                                        <Assign DisplayName="increment no of comp executed" sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_3">
                                           <Assign.To>
                                             <OutArgument x:TypeArguments="x:Int32">[int_ComponentsExecuted]</OutArgument>
                                           </Assign.To>
@@ -593,7 +343,7 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
                                       </Sequence>
                                     </If.Then>
                                     <If.Else>
-                                      <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                      <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_7">
                                         <sap:WorkflowViewStateService.ViewState>
                                           <scg:Dictionary x:TypeArguments="x:String, x:Object">
                                             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -612,10 +362,10 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
                               </scg:Dictionary>
                             </sap:WorkflowViewStateService.ViewState>
                           </ui:ForEach>
-                          <ui:LogMessage DisplayName="No of components executed" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="Info" Message="[&quot;No of components executed for Binder - &quot;+currentTRAutomationMaster.BinderID+&quot; - &quot;+int_ComponentsExecuted.ToString]" />
-                          <ui:LogMessage DisplayName="Creation time" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Info" Message="[&quot;Created entry on - &quot;+currentTRAutomationMaster.CreateTime.ToString]" />
-                          <ui:LogMessage DisplayName="" sap:VirtualizedContainerService.HintSize="433.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_21" Level="Info" Message="[&quot;*********************************************************&quot;]" />
-                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[New Object() {currentTRAutomationMaster.BinderID,currentTRAutomationMaster.ExecutionStatus,currentTRAutomationMaster.EngagementType, currentTRAutomationMaster.ServiceType, currentTRAutomationMaster.SubmissionType,int_ComponentsExecuted,currentTRAutomationMaster.TotalTCsExecuted, currentTRAutomationMaster.TotalTCsPass, currentTRAutomationMaster.TotalTCsFail,currentTRAutomationMaster.UserEmail, currentTRAutomationMaster.ScriptedOn}]" DataTable="[dt_Consolidated_Workflow]" DisplayName="Add Conso record entry " sap:VirtualizedContainerService.HintSize="433.6,211.2" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+                          <ui:LogMessage DisplayName="No of components executed" sap:VirtualizedContainerService.HintSize="568,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Info" Message="[&quot;No of components executed for Binder - &quot;+currentTRAutomationMaster.BinderID+&quot; - &quot;+int_ComponentsExecuted.ToString]" />
+                          <ui:LogMessage DisplayName="Creation time" sap:VirtualizedContainerService.HintSize="568,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Info" Message="[&quot;Created entry on - &quot;+currentTRAutomationMaster.CreateTime.ToString]" />
+                          <ui:LogMessage DisplayName="" sap:VirtualizedContainerService.HintSize="568,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_7" Level="Info" Message="[&quot;*********************************************************&quot;]" />
+                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[New Object() {currentTRAutomationMaster.BinderID,currentTRAutomationMaster.ExecutionStatus,currentTRAutomationMaster.EngagementType, currentTRAutomationMaster.ServiceType, currentTRAutomationMaster.SubmissionType,int_ComponentsExecuted,currentTRAutomationMaster.TotalTCsExecuted, currentTRAutomationMaster.TotalTCsPass, currentTRAutomationMaster.TotalTCsFail,currentTRAutomationMaster.UserEmail, currentTRAutomationMaster.ScriptedOn}]" DataTable="[dt_Consolidated_Workflow]" DisplayName="Add Conso record entry " sap:VirtualizedContainerService.HintSize="568,211.2" sap2010:WorkflowViewState.IdRef="AddDataRow_1" />
                         </Sequence>
                       </ActivityAction>
                     </ui:ForEach.Body>
@@ -626,34 +376,59 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:ForEach>
-                  <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_ConsoReportFolder+&quot;Consolidated_Report_Periodic_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy Consolidated template to datetime report" sap:VirtualizedContainerService.HintSize="416,187.2" sap2010:WorkflowViewState.IdRef="CopyFile_3" Overwrite="True" Path="[in_ConsoTemplatePathRegression]" />
-                  <ui:WriteRange WorkbookPathResource="{x:Null}" AddHeaders="False" DataTable="[dt_Consolidated_Workflow]" DisplayName="Write Conso-data to excel" sap:VirtualizedContainerService.HintSize="416,148" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="Sheet1" StartingCell="A2" WorkbookPath="[in_ConsoReportFolder+&quot;Consolidated_Report_Periodic_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="416,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_22" Level="Info" Message="[&quot;Report generated successfully - &quot;+in_ConsoReportFolder+&quot;Consolidated_Report_Periodic_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
                 </Sequence>
-                <Sequence DisplayName="Periodic Consolidation Report - Sanity" sap:VirtualizedContainerService.HintSize="483.2,2314.4" sap2010:WorkflowViewState.IdRef="Sequence_14">
-                  <Sequence.Variables>
-                    <Variable x:TypeArguments="scg:IList(t:TRSanityMaster)" Name="MasterCollectionIListSanity" />
-                    <Variable x:TypeArguments="sd:DataTable" Name="dt_Consolidated_Sanity" />
-                  </Sequence.Variables>
+              </ui:InterruptibleDoWhile.Body>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InterruptibleDoWhile>
+            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_ConsoReportFolder+&quot;Consolidated_Report_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy Consolidated template to datetime report" sap:VirtualizedContainerService.HintSize="702.4,187.2" sap2010:WorkflowViewState.IdRef="CopyFile_1" Overwrite="True" Path="[in_ConsoTemplatePathRegression]" />
+            <ui:WriteRange WorkbookPathResource="{x:Null}" AddHeaders="False" DataTable="[dt_Consolidated_Workflow]" DisplayName="Write Conso-data to excel" sap:VirtualizedContainerService.HintSize="702.4,148" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A2" WorkbookPath="[in_ConsoReportFolder+&quot;Consolidated_Report_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="702.4,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info" Message="[&quot;Report generated successfully - &quot;+in_ConsoReportFolder+&quot;Consolidated_Report_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
+          </Sequence>
+          <Sequence DisplayName="Daily Consolidation Report - Sanity" sap:VirtualizedContainerService.HintSize="736,2993.6" sap2010:WorkflowViewState.IdRef="Sequence_10">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="scg:IList(t:TRSanityMaster)" Name="MasterCollectionIListSanity" />
+              <Variable x:TypeArguments="sd:DataTable" Name="dt_Consolidated_Sanity" />
+            </Sequence.Variables>
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="516.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_8" Level="Info" Message="[&quot;---Daily---Consolidation---Report---generation---of---Sanity---flows---started&quot;]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="516.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_14" Level="Info" Message="[&quot;****************************************************************************&quot;]" />
+            <ui:BuildDataTable DataTable="[dt_Consolidated_Sanity]" DisplayName="Build Consolidated dt" sap:VirtualizedContainerService.HintSize="516.8,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Binder_x0020_ID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Execution_x0020_Status&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Engagement_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Service_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Submission_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Tax_x0020_Software&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Executed&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Pass&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Fail&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_Execution_x0020_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_Application_x0020_Wait_x0020_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_By&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_On&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:BuildDataTable>
+            <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="516.8,1968.8" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_2">
+              <ui:InterruptibleDoWhile.Body>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="483.2,1822.4" sap2010:WorkflowViewState.IdRef="Sequence_27">
                   <sap:WorkflowViewStateService.ViewState>
                     <scg:Dictionary x:TypeArguments="x:String, x:Object">
                       <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
                     </scg:Dictionary>
                   </sap:WorkflowViewStateService.ViewState>
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_23" Level="Info" Message="[&quot;Historic---Consolidation---Report---generation---of---Sanity---flows---started&quot;]" />
-                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_24" Level="Info" Message="[&quot;****************************************************************************&quot;]" />
-                  <ui:RetryScope DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="449.6,348.8" sap2010:WorkflowViewState.IdRef="RetryScope_4" NumberOfRetries="3">
+                  <ui:RetryScope DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="449.6,348.8" sap2010:WorkflowViewState.IdRef="RetryScope_2" NumberOfRetries="3">
                     <ui:RetryScope.ActivityBody>
                       <ActivityAction>
-                        <uda:QueryEntityRecords x:TypeArguments="t:TRSanityMaster" ContinueOnError="False" DisplayName="Query Sanity Master Entity Records" EntityId="170805a8-b016-f011-aaa7-002248a1377f" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334.4,140.8" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_6" OutputRecords="[MasterCollectionIListSanity]" QueriedEntityId="170805a8-b016-f011-aaa7-002248a1377f" Skip="0" SortAscending="False" SortByField="CreateTime" TimeoutInMs="30000" Top="1000" TotalRecords="[MasterRecords]">
+                        <uda:QueryEntityRecords x:TypeArguments="t:TRSanityMaster" ContinueOnError="False" DisplayName="Query Sanity Master Entity Records" EntityId="170805a8-b016-f011-aaa7-002248a1377f" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334.4,140.8" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_2" OutputRecords="[MasterCollectionIListSanity]" QueriedEntityId="170805a8-b016-f011-aaa7-002248a1377f" Skip="[CounterSanityMasterDaily]" SortAscending="False" SortByField="CreateTime" TimeoutInMs="30000" Top="1000" TotalRecords="[MasterRecords]">
                           <uda:QueryEntityRecords.FilterArguments>
                             <uda:FilterArgument FilterActivityType="{x:Null}">
                               <uda:FilterArgument.Filter>
                                 <uda:GroupFilter Index="0" Operator="AND">
                                   <uda:GroupFilter.Filters>
                                     <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
-                                      <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="CreateTime" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="&gt;" ValueIndex="0" />
+                                      <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="ScriptedOn" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="=" ValueIndex="0" />
                                     </scg:List>
                                   </uda:GroupFilter.Filters>
                                   <uda:GroupFilter.Groups>
@@ -665,7 +440,7 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
                           </uda:QueryEntityRecords.FilterArguments>
                           <uda:QueryEntityRecords.FilterValues>
                             <scg:List x:TypeArguments="InArgument" Capacity="4">
-                              <InArgument x:TypeArguments="s:DateTimeOffset">[now.AddDays(-in_DaysToRetrieve)]</InArgument>
+                              <InArgument x:TypeArguments="x:String">[Now.ToString("dd/MM/yyyy")]</InArgument>
                             </scg:List>
                           </uda:QueryEntityRecords.FilterValues>
                         </uda:QueryEntityRecords>
@@ -681,8 +456,141 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:RetryScope>
-                  <ui:LogMessage DisplayName="Master Entries Log" sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_25" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Master Entries in DB- &quot;+MasterRecords.ToString]" />
-                  <ui:BuildDataTable DataTable="[dt_Consolidated_Sanity]" DisplayName="Build Consolidated dt" sap:VirtualizedContainerService.HintSize="449.6,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_4" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Binder_x0020_ID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Execution_x0020_Status&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Engagement_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Service_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Submission_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Tax_x0020_Software&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Executed&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Pass&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Fail&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_Execution_x0020_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_Application_x0020_Wait_x0020_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_By&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_On&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
+                  <If Condition="[MasterRecords.Equals(0)]" DisplayName="Break loop if no records in master" sap:VirtualizedContainerService.HintSize="449.6,368" sap2010:WorkflowViewState.IdRef="If_6">
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                    <If.Then>
+                      <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,108" sap2010:WorkflowViewState.IdRef="Sequence_30">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:Break sap:VirtualizedContainerService.HintSize="382.4,48" sap2010:WorkflowViewState.IdRef="Break_2" />
+                      </Sequence>
+                    </If.Then>
+                    <If.Else>
+                      <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_31">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                      </Sequence>
+                    </If.Else>
+                  </If>
+                  <Assign DisplayName="Batch Counter (Pagination)" sap:VirtualizedContainerService.HintSize="449.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_7">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="x:Int32">[CounterSanityMasterDaily]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="x:Int32">[CounterSanityMasterDaily+MasterCollectionIListSanity.Count]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:LogMessage DisplayName="Master Entries Log" sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_9" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Master Entries in DB- &quot;+MasterRecords.ToString]" />
+                  <ui:ForEach x:TypeArguments="t:TRSanityMaster" CurrentIndex="{x:Null}" DisplayName="For Each currentSanityMaster" sap:VirtualizedContainerService.HintSize="449.6,757.6" sap2010:WorkflowViewState.IdRef="ForEach`1_4" Values="[MasterCollectionIListSanity]">
+                    <ui:ForEach.Body>
+                      <ActivityAction x:TypeArguments="t:TRSanityMaster">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="t:TRSanityMaster" Name="currentSanityMaster" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,620" sap2010:WorkflowViewState.IdRef="Sequence_11">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <ui:LogMessage DisplayName="Creation time" sap:VirtualizedContainerService.HintSize="382.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_11" Level="Info" Message="[&quot;Created entry on - &quot;+currentSanityMaster.CreateTime.ToString]" />
+                          <ui:LogMessage DisplayName="" sap:VirtualizedContainerService.HintSize="382.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_12" Level="Info" Message="[&quot;*********************************************************&quot;]" />
+                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[New Object() {currentSanityMaster.BinderID,currentSanityMaster.ExecutionStatus,currentSanityMaster.EngagementType, currentSanityMaster.ServiceType, currentSanityMaster.SubmissionType,currentSanityMaster.TaxSoftware,currentSanityMaster.TotalTCsExecuted,currentSanityMaster.TotalTCsPass, currentSanityMaster.TotalTCsFail,currentSanityMaster.TotalExecutionTime,currentSanityMaster.TotalApplicationWaitTime,currentSanityMaster.UserEmail,currentSanityMaster.ScriptedOn}]" DataTable="[dt_Consolidated_Sanity]" DisplayName="Add Conso record entry " sap:VirtualizedContainerService.HintSize="382.4,211.2" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEach.Body>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:ForEach>
+                </Sequence>
+              </ui:InterruptibleDoWhile.Body>
+              <ui:InterruptibleDoWhile.Condition>
+                <VisualBasicValue x:TypeArguments="x:Boolean" DisplayName="Visual basic value" ExpressionText="CounterSanityMasterDaily&lt;=MasterRecords" />
+              </ui:InterruptibleDoWhile.Condition>
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:InterruptibleDoWhile>
+            <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_ConsoReportFolder+&quot;Consolidated_Report_Sanity_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy Consolidated template to datetime report" sap:VirtualizedContainerService.HintSize="516.8,187.2" sap2010:WorkflowViewState.IdRef="CopyFile_2" Overwrite="True" Path="[in_ConsoTemplatePathSanity]" />
+            <ui:WriteRange WorkbookPathResource="{x:Null}" AddHeaders="False" DataTable="[dt_Consolidated_Sanity]" DisplayName="Write Conso-data to excel" sap:VirtualizedContainerService.HintSize="516.8,148" sap2010:WorkflowViewState.IdRef="WriteRange_2" SheetName="Sheet1" StartingCell="A2" WorkbookPath="[in_ConsoReportFolder+&quot;Consolidated_Report_Sanity_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
+            <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="516.8,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_13" Level="Info" Message="[&quot;Report generated successfully - &quot;+in_ConsoReportFolder+&quot;Consolidated_Report_Sanity_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
+          </Sequence>
+        </Sequence>
+      </TryCatch.Try>
+      <TryCatch.Catches>
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="772.8,213.6" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ActivityAction x:TypeArguments="s:Exception">
+            <ActivityAction.Argument>
+              <DelegateInArgument x:TypeArguments="s:Exception" Name="exception" />
+            </ActivityAction.Argument>
+            <ui:LogMessage DisplayName="Log failure " sap:VirtualizedContainerService.HintSize="334.4,142.4" sap2010:WorkflowViewState.IdRef="LogMessage_4" Level="Error" Message="[&quot;Failed to generate consolidated report - &quot;+exception.Message]" />
+          </ActivityAction>
+        </Catch>
+      </TryCatch.Catches>
+    </TryCatch>
+    <If Condition="[in_HistoricReportFlag]" DisplayName="Periodic Consolidation (Regression/Sanity)" sap:VirtualizedContainerService.HintSize="806.4,6206.4" sap2010:WorkflowViewState.IdRef="If_3">
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+      <If.Then>
+        <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="654.4,5955.2" sap2010:WorkflowViewState.IdRef="Sequence_20">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <TryCatch DisplayName="Periodic Consolidation (Regression/Sanity)" sap:VirtualizedContainerService.HintSize="620.8,5895.2" sap2010:WorkflowViewState.IdRef="TryCatch_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                <x:Boolean x:Key="IsPinned">False</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <TryCatch.Try>
+              <Sequence DisplayName="Periodic Consolidation - Regression/Sanity" sap:VirtualizedContainerService.HintSize="584,5346.4" sap2010:WorkflowViewState.IdRef="Sequence_19">
+                <sap:WorkflowViewStateService.ViewState>
+                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                  </scg:Dictionary>
+                </sap:WorkflowViewStateService.ViewState>
+                <Sequence DisplayName="Historic Consolidation Report - Regression" sap:VirtualizedContainerService.HintSize="550.4,2292.8" sap2010:WorkflowViewState.IdRef="Sequence_12">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="516.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_16" Level="Info" Message="[&quot;Historic---Consolidation---Report---generation---of---Workflow---started&quot;]" />
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="516.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_17" Level="Info" Message="[&quot;****************************************************************************&quot;]" />
+                  <ui:BuildDataTable DataTable="[dt_Consolidated_Workflow]" DisplayName="Build Consolidated dt" sap:VirtualizedContainerService.HintSize="516.8,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_3" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Binder_x0020_ID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Execution_x0020_Status&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Engagement_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Service_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Submission_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;No_x0020_of_x0020_Components_x0020_Executed&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Executed&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Pass&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Fail&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_By&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_On&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -690,31 +598,349 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
                   </ui:BuildDataTable>
-                  <ui:ForEach x:TypeArguments="t:TRSanityMaster" CurrentIndex="{x:Null}" DisplayName="For Each currentSanityMaster" sap:VirtualizedContainerService.HintSize="449.6,766.4" sap2010:WorkflowViewState.IdRef="ForEach`1_7" Values="[MasterCollectionIListSanity]">
-                    <ui:ForEach.Body>
-                      <ActivityAction x:TypeArguments="t:TRSanityMaster">
-                        <ActivityAction.Argument>
-                          <DelegateInArgument x:TypeArguments="t:TRSanityMaster" Name="currentSanityMaster" />
-                        </ActivityAction.Argument>
-                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,620" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                  <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="516.8,1259.2" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_3">
+                    <ui:InterruptibleDoWhile.Body>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="483.2,1112.8" sap2010:WorkflowViewState.IdRef="Sequence_38">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:RetryScope DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="449.6,348.8" sap2010:WorkflowViewState.IdRef="RetryScope_3" NumberOfRetries="3">
+                          <ui:RetryScope.ActivityBody>
+                            <ActivityAction>
+                              <uda:QueryEntityRecords x:TypeArguments="t:TRAutomationMaster" ContinueOnError="False" DisplayName="Query Master Entity Records" EntityId="6e0003df-b003-f011-90cb-0022489c7866" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334.4,140.8" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_4" OutputRecords="[MasterCollectionIListRegression]" QueriedEntityId="6e0003df-b003-f011-90cb-0022489c7866" Skip="[CounterAutomationMasterHistoric]" SortAscending="False" SortByField="CreateTime" TimeoutInMs="30000" Top="1000" TotalRecords="[MasterRecords]">
+                                <uda:QueryEntityRecords.FilterArguments>
+                                  <uda:FilterArgument FilterActivityType="{x:Null}">
+                                    <uda:FilterArgument.Filter>
+                                      <uda:GroupFilter Index="0" Operator="AND">
+                                        <uda:GroupFilter.Filters>
+                                          <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
+                                            <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="CreateTime" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="&gt;" ValueIndex="0" />
+                                          </scg:List>
+                                        </uda:GroupFilter.Filters>
+                                        <uda:GroupFilter.Groups>
+                                          <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
+                                        </uda:GroupFilter.Groups>
+                                      </uda:GroupFilter>
+                                    </uda:FilterArgument.Filter>
+                                  </uda:FilterArgument>
+                                </uda:QueryEntityRecords.FilterArguments>
+                                <uda:QueryEntityRecords.FilterValues>
+                                  <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                    <InArgument x:TypeArguments="s:DateTimeOffset">[now.AddDays(-in_DaysToRetrieve)]</InArgument>
+                                  </scg:List>
+                                </uda:QueryEntityRecords.FilterValues>
+                              </uda:QueryEntityRecords>
+                            </ActivityAction>
+                          </ui:RetryScope.ActivityBody>
+                          <ui:RetryScope.Condition>
+                            <ActivityFunc x:TypeArguments="x:Boolean" />
+                          </ui:RetryScope.Condition>
                           <sap:WorkflowViewStateService.ViewState>
                             <scg:Dictionary x:TypeArguments="x:String, x:Object">
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <ui:LogMessage DisplayName="Creation time" sap:VirtualizedContainerService.HintSize="382.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_26" Level="Info" Message="[&quot;Created entry on - &quot;+currentSanityMaster.CreateTime.ToString]" />
-                          <ui:LogMessage DisplayName="" sap:VirtualizedContainerService.HintSize="382.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_27" Level="Info" Message="[&quot;*********************************************************&quot;]" />
-                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[New Object() {currentSanityMaster.BinderID,currentSanityMaster.ExecutionStatus,currentSanityMaster.EngagementType, currentSanityMaster.ServiceType, currentSanityMaster.SubmissionType,currentSanityMaster.TaxSoftware,currentSanityMaster.TotalTCsExecuted,currentSanityMaster.TotalTCsPass, currentSanityMaster.TotalTCsFail,currentSanityMaster.TotalExecutionTime,currentSanityMaster.TotalApplicationWaitTime,currentSanityMaster.UserEmail,currentSanityMaster.ScriptedOn}]" DataTable="[dt_Consolidated_Sanity]" DisplayName="Add Conso record entry " sap:VirtualizedContainerService.HintSize="382.4,211.2" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
-                        </Sequence>
-                      </ActivityAction>
-                    </ui:ForEach.Body>
+                        </ui:RetryScope>
+                        <If Condition="[MasterRecords.Equals(0)]" DisplayName="Break loop if no records in master" sap:VirtualizedContainerService.HintSize="449.6,368" sap2010:WorkflowViewState.IdRef="If_7">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If.Then>
+                            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,108" sap2010:WorkflowViewState.IdRef="Sequence_33">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:Break sap:VirtualizedContainerService.HintSize="382.4,48" sap2010:WorkflowViewState.IdRef="Break_3" />
+                            </Sequence>
+                          </If.Then>
+                          <If.Else>
+                            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_34">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </Sequence>
+                          </If.Else>
+                        </If>
+                        <Assign DisplayName="Batch Counter (Pagination)" sap:VirtualizedContainerService.HintSize="449.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_10">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[CounterAutomationMasterHistoric]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[CounterAutomationMasterHistoric+MasterCollectionIListRegression.Count]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:LogMessage DisplayName="Master Entries Log" sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_18" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Master Entries in DB- &quot;+MasterRecords.ToString]" />
+                        <ui:ForEach x:TypeArguments="t:TRAutomationMaster" CurrentIndex="{x:Null}" DisplayName="For Each currentTRAutomationMaster" sap:VirtualizedContainerService.HintSize="449.6,48" sap2010:WorkflowViewState.IdRef="ForEach`1_6" Values="[MasterCollectionIListRegression]">
+                          <ui:ForEach.Body>
+                            <ActivityAction x:TypeArguments="t:TRAutomationMaster">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="t:TRAutomationMaster" Name="currentTRAutomationMaster" />
+                              </ActivityAction.Argument>
+                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="601.6,1532" sap2010:WorkflowViewState.IdRef="Sequence_13">
+                                <Sequence.Variables>
+                                  <Variable x:TypeArguments="x:Int32" Name="int_ComponentsExecuted" />
+                                </Sequence.Variables>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Assign DisplayName="Component status" sap:VirtualizedContainerService.HintSize="568,115.2" sap2010:WorkflowViewState.IdRef="Assign_4">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[str_ComponentStatus]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String" xml:space="preserve">[currentTRAutomationMaster.StatusAddDocumentFileroom+"_"+
+currentTRAutomationMaster.StatusAddDocumentSPBinder+"_"+
+currentTRAutomationMaster.StatusAddDocumentTaxcaddy+"_"+
+currentTRAutomationMaster.StatusAnnotation+"_"+
+currentTRAutomationMaster.StatusBinderMenu+"_"+
+currentTRAutomationMaster.StatusClientCreation+"_"+
+currentTRAutomationMaster.StatusDragDrop+"_"+
+currentTRAutomationMaster.StatusExportMatchUpdate1stRun+"_"+
+currentTRAutomationMaster.StatusExportMatchUpdate2ndRun+"_"+
+currentTRAutomationMaster.StatusImportTR+"_"+
+currentTRAutomationMaster.StatusIndexTree+"_"+
+currentTRAutomationMaster.StatusNotes+"_"+
+currentTRAutomationMaster.StatusPrint1stRun+"_"+
+currentTRAutomationMaster.StatusPrint2ndRun+"_"+
+currentTRAutomationMaster.StatusPrint3rdRun+"_"+
+currentTRAutomationMaster.StatusReviewTree+"_"+
+currentTRAutomationMaster.StatusSCD+"_"+
+currentTRAutomationMaster.StatusSubmissionWizard+"_"+
+currentTRAutomationMaster.StatusWizard]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="No of components executed based on status" sap:VirtualizedContainerService.HintSize="568,622.4" sap2010:WorkflowViewState.IdRef="ForEach`1_5" Values="[str_ComponentStatus.Split(&quot;_&quot;c)]">
+                                  <ui:ForEach.Body>
+                                    <ActivityAction x:TypeArguments="x:String">
+                                      <ActivityAction.Argument>
+                                        <DelegateInArgument x:TypeArguments="x:String" Name="currentText" />
+                                      </ActivityAction.Argument>
+                                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="534.4,476" sap2010:WorkflowViewState.IdRef="Sequence_18">
+                                        <sap:WorkflowViewStateService.ViewState>
+                                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                          </scg:Dictionary>
+                                        </sap:WorkflowViewStateService.ViewState>
+                                        <If Condition="[NOT currentText.Equals(&quot;Not executed&quot;) and NOT String.IsNullOrEmpty(currentText)]" DisplayName="Success/Failure status" sap:VirtualizedContainerService.HintSize="500.8,416" sap2010:WorkflowViewState.IdRef="If_2">
+                                          <If.Then>
+                                            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="467.2,164.8" sap2010:WorkflowViewState.IdRef="Sequence_16">
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                              <Assign DisplayName="increment no of comp executed" sap:VirtualizedContainerService.HintSize="433.6,104.8" sap2010:WorkflowViewState.IdRef="Assign_5">
+                                                <Assign.To>
+                                                  <OutArgument x:TypeArguments="x:Int32">[int_ComponentsExecuted]</OutArgument>
+                                                </Assign.To>
+                                                <Assign.Value>
+                                                  <InArgument x:TypeArguments="x:Int32">[int_ComponentsExecuted+1]</InArgument>
+                                                </Assign.Value>
+                                              </Assign>
+                                            </Sequence>
+                                          </If.Then>
+                                          <If.Else>
+                                            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_17">
+                                              <sap:WorkflowViewStateService.ViewState>
+                                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                                </scg:Dictionary>
+                                              </sap:WorkflowViewStateService.ViewState>
+                                            </Sequence>
+                                          </If.Else>
+                                        </If>
+                                      </Sequence>
+                                    </ActivityAction>
+                                  </ui:ForEach.Body>
+                                  <sap:WorkflowViewStateService.ViewState>
+                                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                                    </scg:Dictionary>
+                                  </sap:WorkflowViewStateService.ViewState>
+                                </ui:ForEach>
+                                <ui:LogMessage DisplayName="No of components executed" sap:VirtualizedContainerService.HintSize="568,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_19" Level="Info" Message="[&quot;No of components executed for Binder - &quot;+currentTRAutomationMaster.BinderID+&quot; - &quot;+int_ComponentsExecuted.ToString]" />
+                                <ui:LogMessage DisplayName="Creation time" sap:VirtualizedContainerService.HintSize="568,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_20" Level="Info" Message="[&quot;Created entry on - &quot;+currentTRAutomationMaster.CreateTime.ToString]" />
+                                <ui:LogMessage DisplayName="" sap:VirtualizedContainerService.HintSize="568,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_21" Level="Info" Message="[&quot;*********************************************************&quot;]" />
+                                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[New Object() {currentTRAutomationMaster.BinderID,currentTRAutomationMaster.ExecutionStatus,currentTRAutomationMaster.EngagementType, currentTRAutomationMaster.ServiceType, currentTRAutomationMaster.SubmissionType,int_ComponentsExecuted,currentTRAutomationMaster.TotalTCsExecuted, currentTRAutomationMaster.TotalTCsPass, currentTRAutomationMaster.TotalTCsFail,currentTRAutomationMaster.UserEmail, currentTRAutomationMaster.ScriptedOn}]" DataTable="[dt_Consolidated_Workflow]" DisplayName="Add Conso record entry " sap:VirtualizedContainerService.HintSize="568,211.2" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+                              </Sequence>
+                            </ActivityAction>
+                          </ui:ForEach.Body>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:ForEach>
+                      </Sequence>
+                    </ui:InterruptibleDoWhile.Body>
+                    <ui:InterruptibleDoWhile.Condition>
+                      <VisualBasicValue x:TypeArguments="x:Boolean" DisplayName="Visual basic value" ExpressionText="CounterAutomationMasterHistoric&lt;=MasterRecords" />
+                    </ui:InterruptibleDoWhile.Condition>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InterruptibleDoWhile>
+                  <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_ConsoReportFolder+&quot;Consolidated_Report_Periodic_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy Consolidated template to datetime report" sap:VirtualizedContainerService.HintSize="516.8,187.2" sap2010:WorkflowViewState.IdRef="CopyFile_3" Overwrite="True" Path="[in_ConsoTemplatePathRegression]" />
+                  <ui:WriteRange WorkbookPathResource="{x:Null}" AddHeaders="False" DataTable="[dt_Consolidated_Workflow]" DisplayName="Write Conso-data to excel" sap:VirtualizedContainerService.HintSize="516.8,148" sap2010:WorkflowViewState.IdRef="WriteRange_3" SheetName="Sheet1" StartingCell="A2" WorkbookPath="[in_ConsoReportFolder+&quot;Consolidated_Report_Periodic_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="516.8,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_22" Level="Info" Message="[&quot;Report generated successfully - &quot;+in_ConsoReportFolder+&quot;Consolidated_Report_Periodic_Regression_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
+                </Sequence>
+                <Sequence DisplayName="Periodic Consolidation Report - Sanity" sap:VirtualizedContainerService.HintSize="550.4,2993.6" sap2010:WorkflowViewState.IdRef="Sequence_14">
+                  <Sequence.Variables>
+                    <Variable x:TypeArguments="scg:IList(t:TRSanityMaster)" Name="MasterCollectionIListSanity" />
+                    <Variable x:TypeArguments="sd:DataTable" Name="dt_Consolidated_Sanity" />
+                  </Sequence.Variables>
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                      <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="516.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_23" Level="Info" Message="[&quot;Historic---Consolidation---Report---generation---of---Sanity---flows---started&quot;]" />
+                  <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="516.8,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_24" Level="Info" Message="[&quot;****************************************************************************&quot;]" />
+                  <ui:BuildDataTable DataTable="[dt_Consolidated_Sanity]" DisplayName="Build Consolidated dt" sap:VirtualizedContainerService.HintSize="516.8,92" sap2010:WorkflowViewState.IdRef="BuildDataTable_4" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;Binder_x0020_ID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Execution_x0020_Status&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Engagement_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Service_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Submission_x0020_Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Tax_x0020_Software&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Executed&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Pass&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_TC_x0027_s_x0020_-_x0020_Fail&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_Execution_x0020_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Total_x0020_Application_x0020_Wait_x0020_Time&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_By&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Executed_x0020_On&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                  </ui:ForEach>
+                  </ui:BuildDataTable>
+                  <ui:InterruptibleDoWhile CurrentIndex="{x:Null}" DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="516.8,1968.8" sap2010:WorkflowViewState.IdRef="InterruptibleDoWhile_4">
+                    <ui:InterruptibleDoWhile.Body>
+                      <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="483.2,1822.4" sap2010:WorkflowViewState.IdRef="Sequence_45">
+                        <sap:WorkflowViewStateService.ViewState>
+                          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                          </scg:Dictionary>
+                        </sap:WorkflowViewStateService.ViewState>
+                        <ui:RetryScope DisplayName="Query DataService Master Entity Records" sap:VirtualizedContainerService.HintSize="449.6,348.8" sap2010:WorkflowViewState.IdRef="RetryScope_4" NumberOfRetries="3">
+                          <ui:RetryScope.ActivityBody>
+                            <ActivityAction>
+                              <uda:QueryEntityRecords x:TypeArguments="t:TRSanityMaster" ContinueOnError="False" DisplayName="Query Sanity Master Entity Records" EntityId="170805a8-b016-f011-aaa7-002248a1377f" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="334.4,140.8" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_6" OutputRecords="[MasterCollectionIListSanity]" QueriedEntityId="170805a8-b016-f011-aaa7-002248a1377f" Skip="[CounterSanityMasterHistoric]" SortAscending="False" SortByField="CreateTime" TimeoutInMs="30000" Top="1000" TotalRecords="[MasterRecords]">
+                                <uda:QueryEntityRecords.FilterArguments>
+                                  <uda:FilterArgument FilterActivityType="{x:Null}">
+                                    <uda:FilterArgument.Filter>
+                                      <uda:GroupFilter Index="0" Operator="AND">
+                                        <uda:GroupFilter.Filters>
+                                          <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
+                                            <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="CreateTime" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="&gt;" ValueIndex="0" />
+                                          </scg:List>
+                                        </uda:GroupFilter.Filters>
+                                        <uda:GroupFilter.Groups>
+                                          <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
+                                        </uda:GroupFilter.Groups>
+                                      </uda:GroupFilter>
+                                    </uda:FilterArgument.Filter>
+                                  </uda:FilterArgument>
+                                </uda:QueryEntityRecords.FilterArguments>
+                                <uda:QueryEntityRecords.FilterValues>
+                                  <scg:List x:TypeArguments="InArgument" Capacity="4">
+                                    <InArgument x:TypeArguments="s:DateTimeOffset">[now.AddDays(-in_DaysToRetrieve)]</InArgument>
+                                  </scg:List>
+                                </uda:QueryEntityRecords.FilterValues>
+                              </uda:QueryEntityRecords>
+                            </ActivityAction>
+                          </ui:RetryScope.ActivityBody>
+                          <ui:RetryScope.Condition>
+                            <ActivityFunc x:TypeArguments="x:Boolean" />
+                          </ui:RetryScope.Condition>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:RetryScope>
+                        <If Condition="[MasterRecords.Equals(0)]" DisplayName="Break loop if no records in master" sap:VirtualizedContainerService.HintSize="449.6,368" sap2010:WorkflowViewState.IdRef="If_9">
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <If.Then>
+                            <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,108" sap2010:WorkflowViewState.IdRef="Sequence_40">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                              <ui:Break sap:VirtualizedContainerService.HintSize="382.4,48" sap2010:WorkflowViewState.IdRef="Break_4" />
+                            </Sequence>
+                          </If.Then>
+                          <If.Else>
+                            <Sequence DisplayName="Else" sap:VirtualizedContainerService.HintSize="416,89.6" sap2010:WorkflowViewState.IdRef="Sequence_41">
+                              <sap:WorkflowViewStateService.ViewState>
+                                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                </scg:Dictionary>
+                              </sap:WorkflowViewStateService.ViewState>
+                            </Sequence>
+                          </If.Else>
+                        </If>
+                        <Assign DisplayName="Batch Counter (Pagination)" sap:VirtualizedContainerService.HintSize="449.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_13">
+                          <Assign.To>
+                            <OutArgument x:TypeArguments="x:Int32">[CounterSanityMasterHistoric]</OutArgument>
+                          </Assign.To>
+                          <Assign.Value>
+                            <InArgument x:TypeArguments="x:Int32">[CounterSanityMasterHistoric+MasterCollectionIListSanity.Count]</InArgument>
+                          </Assign.Value>
+                        </Assign>
+                        <ui:LogMessage DisplayName="Master Entries Log" sap:VirtualizedContainerService.HintSize="449.6,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_25" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Master Entries in DB- &quot;+MasterRecords.ToString]" />
+                        <ui:ForEach x:TypeArguments="t:TRSanityMaster" CurrentIndex="{x:Null}" DisplayName="For Each currentSanityMaster" sap:VirtualizedContainerService.HintSize="449.6,757.6" sap2010:WorkflowViewState.IdRef="ForEach`1_7" Values="[MasterCollectionIListSanity]">
+                          <ui:ForEach.Body>
+                            <ActivityAction x:TypeArguments="t:TRSanityMaster">
+                              <ActivityAction.Argument>
+                                <DelegateInArgument x:TypeArguments="t:TRSanityMaster" Name="currentSanityMaster" />
+                              </ActivityAction.Argument>
+                              <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,620" sap2010:WorkflowViewState.IdRef="Sequence_15">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <ui:LogMessage DisplayName="Creation time" sap:VirtualizedContainerService.HintSize="382.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_26" Level="Info" Message="[&quot;Created entry on - &quot;+currentSanityMaster.CreateTime.ToString]" />
+                                <ui:LogMessage DisplayName="" sap:VirtualizedContainerService.HintSize="382.4,174.4" sap2010:WorkflowViewState.IdRef="LogMessage_27" Level="Info" Message="[&quot;*********************************************************&quot;]" />
+                                <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[New Object() {currentSanityMaster.BinderID,currentSanityMaster.ExecutionStatus,currentSanityMaster.EngagementType, currentSanityMaster.ServiceType, currentSanityMaster.SubmissionType,currentSanityMaster.TaxSoftware,currentSanityMaster.TotalTCsExecuted,currentSanityMaster.TotalTCsPass, currentSanityMaster.TotalTCsFail,currentSanityMaster.TotalExecutionTime,currentSanityMaster.TotalApplicationWaitTime,currentSanityMaster.UserEmail,currentSanityMaster.ScriptedOn}]" DataTable="[dt_Consolidated_Sanity]" DisplayName="Add Conso record entry " sap:VirtualizedContainerService.HintSize="382.4,211.2" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
+                              </Sequence>
+                            </ActivityAction>
+                          </ui:ForEach.Body>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                              <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                        </ui:ForEach>
+                      </Sequence>
+                    </ui:InterruptibleDoWhile.Body>
+                    <ui:InterruptibleDoWhile.Condition>
+                      <VisualBasicValue x:TypeArguments="x:Boolean" DisplayName="Visual basic value" ExpressionText="CounterSanityMasterHistoric&lt;=MasterRecords" />
+                    </ui:InterruptibleDoWhile.Condition>
+                    <sap:WorkflowViewStateService.ViewState>
+                      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                        <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+                        <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                      </scg:Dictionary>
+                    </sap:WorkflowViewStateService.ViewState>
+                  </ui:InterruptibleDoWhile>
                   <ui:CopyFile ContinueOnError="{x:Null}" Destination="[in_ConsoReportFolder+&quot;Consolidated_Report_Periodic_Sanity_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" DisplayName="Copy Consolidated template to datetime report" sap:VirtualizedContainerService.HintSize="449.6,187.2" sap2010:WorkflowViewState.IdRef="CopyFile_4" Overwrite="True" Path="[in_ConsoTemplatePathSanity]" />
                   <ui:WriteRange WorkbookPathResource="{x:Null}" AddHeaders="False" DataTable="[dt_Consolidated_Sanity]" DisplayName="Write Conso-data to excel" sap:VirtualizedContainerService.HintSize="449.6,148" sap2010:WorkflowViewState.IdRef="WriteRange_4" SheetName="Sheet1" StartingCell="A2" WorkbookPath="[in_ConsoReportFolder+&quot;Consolidated_Report_Periodic_Sanity_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
                   <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="449.6,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_28" Level="Info" Message="[&quot;Report generated successfully - &quot;+in_ConsoReportFolder+&quot;Consolidated_Report_Periodic_Sanity_&quot;+now.ToString(&quot;dd/MM/yyyy&quot;).Replace(&quot;/&quot;,&quot;_&quot;)+&quot;.xlsx&quot;]" />
@@ -722,7 +948,7 @@ currentTRAutomationMaster.StatusWizard]</InArgument>
               </Sequence>
             </TryCatch.Try>
             <TryCatch.Catches>
-              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="520,23.2" sap2010:WorkflowViewState.IdRef="Catch`1_2">
+              <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="486.4,213.6" sap2010:WorkflowViewState.IdRef="Catch`1_2">
                 <sap:WorkflowViewStateService.ViewState>
                   <scg:Dictionary x:TypeArguments="x:String, x:Object">
                     <x:Boolean x:Key="IsExpanded">False</x:Boolean>
