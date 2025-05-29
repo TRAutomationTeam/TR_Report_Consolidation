@@ -17,12 +17,12 @@
       "serviceDocument": ".entities/EntitiesStore.json",
       "tenantName": "DefaultTenant",
       "namespace": "TR_Report_Consolidation",
-      "uniqueReference": "ffWhUzidLDUxkcpnLhu84ySZ8SQ/wtYxYxzoxYqqvmA="
+      "uniqueReference": "vkdjtqa5SQ362OShQkP3Gnt4YOB6/Aykw74mPNo++EE="
     }
   ],
   "schemaVersion": "4.0",
   "studioVersion": "24.10.8.0",
-  "projectVersion": "1.0.3",
+  "projectVersion": "1.0.7",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,
@@ -36,10 +36,10 @@
       "*password*"
     ],
     "executionType": "Workflow",
-    "readyForPiP": false,
-    "startsInPiP": false,
+    "readyForPiP": true,
+    "startsInPiP": true,
     "mustRestoreAllDependencies": true,
-    "pipType": "ChildSession"
+    "pipType": "SecondaryDesktop"
   },
   "designOptions": {
     "projectProfile": "Developement",
